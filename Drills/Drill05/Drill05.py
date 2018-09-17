@@ -82,9 +82,7 @@ def char_move():
             move_right_up(data[count][0],data[count][1],data[count+1][0],data[count+1][1])
         elif data[count][0]<data[count+1][0] and data[count][1]>data[count+1][1]:
             move_right_down(data[count][0],data[count][1],data[count+1][0],data[count+1][1])
-        count+=1
-
-
+        count += 1
 
 while True:
     char_move()
