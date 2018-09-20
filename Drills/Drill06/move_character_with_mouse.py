@@ -18,6 +18,7 @@ def handle_events():
         elif event.type==SDL_MOUSEBUTTONDOWN:
             move_x=cursor_x
             move_y=cursor_y
+            if()
         elif event.type==SDL_KEYDOWN and event.key==SDLK_ESCAPE:
             running=False
 
@@ -29,6 +30,8 @@ character = load_image('animation_sheet.png')
 cursor=load_image("hand_arrow.png")
 
 running = True
+dir=0
+pos=0
 x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
 move_x,move_y=KPU_WIDTH // 2, KPU_HEIGHT // 2
 cursor_x,cursor_y=KPU_WIDTH // 2, KPU_HEIGHT // 2
