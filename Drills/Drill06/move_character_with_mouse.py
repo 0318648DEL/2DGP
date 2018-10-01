@@ -18,7 +18,6 @@ def handle_events():
         elif event.type==SDL_MOUSEBUTTONDOWN:
             move_x=cursor_x
             move_y=cursor_y
-            if()
         elif event.type==SDL_KEYDOWN and event.key==SDLK_ESCAPE:
             running=False
 
