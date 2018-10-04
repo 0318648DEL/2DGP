@@ -88,10 +88,39 @@ def draw_curve_10p_connect(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10):
         elif p1[0]>p2[0] and p1[1]>p2[1]:
             move_left_down(p1[0],p1[1],p2[0],p2[1])
         elif p1[0]<p2[0] and p1[1]<p2[1]:
-            move_right_up(p1[0],p2[0],p1[1],p2[1])
+            move_right_up(p1[0],p1[1],p2[0],p2[1])
         elif p1[0]<p2[0] and p1[1]>p2[1]:
-            move_right_down(p1[0],p2[0],p1[1],p2[1])
-    
+            move_right_down(p1[0],p1[1],p2[0],p2[1])
+
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = ((-t ** 3 + 2 * t ** 2 - t) * p1[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[0] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * p3[0] + (t ** 3 - t ** 2) * p4[0]) / 2
+        y = ((-t ** 3 + 2 * t ** 2 - t) * p1[1] + (3 * t ** 3 - 5 * t ** 2 + 2) * p2[1] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * p3[1] + (t ** 3 - t ** 2) * p4[1]) / 2
+        if p2[0]>p3[0] and p2[1]<p3[1]:
+            move_left_up(p2[0],p2[1],p3[0],p3[1])
+        elif p2[0]>p3[0] and p2[1]>p3[1]:
+            move_left_down(p2[0],p2[1],p3[0],p3[1])
+        elif p2[0]<p3[0] and p2[1]<p3[1]:
+            move_right_up(p2[0],p2[1],p3[0],p3[1])
+        elif p2[0]<p3[0] and p2[1]>p3[1]:
+            move_right_down(p2[0],p2[1],p3[0],p3[1])
+
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = ((-t ** 3 + 2 * t ** 2 - t) * p2[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * p3[0] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * p4[0] + (t ** 3 - t ** 2) * p5[0]) / 2
+        y = ((-t ** 3 + 2 * t ** 2 - t) * p2[1] + (3 * t ** 3 - 5 * t ** 2 + 2) * p3[1] + (
+                    -3 * t ** 3 + 4 * t ** 2 + t) * p4[1] + (t ** 3 - t ** 2) * p5[1]) / 2
+        if p3[0]>p4[0] and p3[1]<p4[1]:
+            move_left_up(p3[0],p3[1],p4[0],p4[1])
+        elif p3[0]>p4[0] and p3[1]>p4[1]:
+            move_left_down(p3[0],p3[1],p4[0],p4[1])
+        elif p3[0]<p4[0] and p3[1]<p4[1]:
+            move_right_up(p3[0],p3[1],p4[0],p4[1])
+        elif p3[0]<p4[0] and p3[1]>p4[1]:
+            move_right_down(p3[0],p3[1],p4[0],p4[1])
 
 
 close_canvas()
