@@ -36,6 +36,18 @@ def prepare_turtle_canvas():
     turtle.onkey(stop, 'Escape')
     turtle.listen()
 
+def draw_big_point(p):
+    turtle.goto(p)
+    turtle.color(0.8, 0.9, 0)
+    turtle.dot(15)
+    turtle.write('     '+str(p))
+
+
+def draw_point(p):
+    turtle.goto(p)
+    turtle.dot(5, random.random(), random.random(), random.random())
+
+
 prepare_turtle_canvas()
 
 turtle.done()
