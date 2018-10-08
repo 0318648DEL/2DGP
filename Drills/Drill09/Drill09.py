@@ -8,7 +8,7 @@ class Ball21:
 
     def update(self):
         if(self.y >= 70):
-            self.y -= 5
+            self.y -= 1
 
     def draw(self):
         self.image.draw(self.x,self.y)
@@ -20,7 +20,7 @@ class Ball41:
 
     def update(self):
         if (self.y >= 80):
-            self.y -= 5
+            self.y -= 1
 
     def draw(self):
         self.image.draw(self.x, self.y)
@@ -90,3 +90,5 @@ while running:
     update_canvas()
 
     delay(0.05)
+
+close_canvas()
