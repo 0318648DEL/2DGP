@@ -53,3 +53,13 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
+
+open_canvas()
+
+ball_rand=random.randint(0,20)
+bigBalls=[Ball41() for i in range(ball_rand)]
+smallBalls=[Ball21() for i in range(20-ball_rand)]
+team=[Boy() for i in range(11)]
+grass=Grass()
+
+running=True
