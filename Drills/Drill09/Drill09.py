@@ -24,3 +24,10 @@ class Ball41:
 
     def draw(self):
         self.image.draw(self.x, self.y)
+
+class Grass:
+    def __init__(self):
+        self.image=load_image('grass.png')
+
+    def draw(self):
+        self.image.draw(400,30)
