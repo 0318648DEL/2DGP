@@ -63,3 +63,30 @@ team=[Boy() for i in range(11)]
 grass=Grass()
 
 running=True
+
+while running:
+    handle_events()
+
+    for boy in team:
+        boy.update()
+
+    for Ball41 in bigBalls:
+        Ball41.update()
+
+    for Ball21 in smallBalls:
+        Ball21.update()
+
+    clear_canvas()
+    grass.draw()
+    for boy in team:
+        boy.draw()
+
+    for Ball41 in bigBalls:
+        Ball41.draw()
+
+    for Ball21 in smallBalls:
+        Ball21.draw()
+
+    update_canvas()
+
+    delay(0.05)

@@ -83,10 +83,13 @@ while running:
     grass.draw()
     for boy in team:
         boy.draw()
+
     for Ball41 in bigBalls:
         Ball41.draw()
+
     for Ball21 in smallBalls:
         Ball21.draw()
+
     update_canvas()
 
     delay(0.05)
