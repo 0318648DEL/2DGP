@@ -4,11 +4,12 @@ import random
 class Ball21:
     def __init__(self):
         self.x,self.y=random.randint(100,700),random.randint(100,500)
+        self.fall=random.randint(1,10)
         self.image=load_image('ball21x21.png')
 
     def update(self):
         if(self.y >= 70):
-            self.y -= 1
+            self.y -= self.fall
 
     def draw(self):
         self.image.draw(self.x,self.y)
@@ -16,11 +17,12 @@ class Ball21:
 class Ball41:
     def __init__(self):
         self.x, self.y = random.randint(100, 700), random.randint(100, 500)
+        self.fall = random.randint(1, 10)
         self.image = load_image('ball41x41.png')
 
     def update(self):
         if (self.y >= 80):
-            self.y -= 1
+            self.y -= self.fall
 
     def draw(self):
         self.image.draw(self.x, self.y)
