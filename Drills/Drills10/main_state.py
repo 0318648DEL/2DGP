@@ -76,6 +76,7 @@ def handle_events():
             game_framework.push_state(pause_state)
 
 
+
 def update():
     boy.update()
 
