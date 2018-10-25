@@ -4,7 +4,7 @@ from ball import Ball
 import game_world
 
 # Boy Event
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE, DASH = range(7)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE, DASH_GO,DASH_STOP = range(8)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -12,8 +12,10 @@ key_event_table = {
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYDOWN,SDLK_SPACE):SPACE,
-    (SDL_KEYDOWN,SDL_SCANCODE_LSHIFT):DASH,
-    (SDL_KEYDOWN,SDL_SCANCODE_RSHIFT):DASH,
+    (SDL_KEYDOWN,SDLK_LSHIFT):DASH_GO,
+    (SDL_KEYDOWN,SDLK_RSHIFT):DASH_GO,
+    (SDL_KEYUP,SDLK_LSHIFT):DASH_STOP,
+    (SDL_KEYUP,SDLK_RSHIFT):DASH_STOP
 }
 
 
@@ -75,8 +77,7 @@ class RunState:
         # fill here
         if event==SPACE:
             boy.fire_ball()
-        elif event==DASH:
-            boy.add_event(DASH)
+
 
     @staticmethod
     def do(boy):
@@ -120,15 +121,8 @@ class DashState:
 
     @staticmethod
     def enter(boy, event):
-        if event == RIGHT_DOWN:
-            boy.velocity += 5
-        elif event == LEFT_DOWN:
-            boy.velocity -= 5
-        elif event == RIGHT_UP:
-            boy.velocity -= 5
-        elif event == LEFT_UP:
-            boy.velocity += 5
         boy.dir = boy.velocity
+        boy.run_timer=50
 
     @staticmethod
     def exit(boy, event):
@@ -138,18 +132,19 @@ class DashState:
 
     @staticmethod
     def do(boy):
+        print("달리기")
         boy.frame = (boy.frame + 1) % 8
-        boy.timer -= 1
-        if(boy.timer==0):
-            boy.add_event(IdleState)
-        else:
-            boy.x += (boy.velocity * 3)
-            boy.x = clamp(25, boy.x, 1600 - 25)
+        boy.x += (boy.velocity * 10)
+        boy.x = clamp(25, boy.x, 1600 - 25)
+        boy.run_timer -= 1
+        if(boy.run_timer<=0):
+            boy.add_event(SLEEP_TIMER)
+
 
 
     @staticmethod
     def draw(boy):
-        if boy.velocity == 1:
+        if boy.velocity >= 1:
             boy.image.clip_draw(boy.frame * 100, 100, 100, 100, boy.x, boy.y)
         else:
             boy.image.clip_draw(boy.frame * 100, 0, 100, 100, boy.x, boy.y)
@@ -157,9 +152,9 @@ class DashState:
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,SLEEP_TIMER:SleepState,SPACE:IdleState,DASH:RunState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,SPACE:RunState,DASH:RunState},
-    SleepState:{LEFT_DOWN:RunState,RIGHT_DOWN:RunState,LEFT_UP:RunState,RIGHT_UP:RunState,SPACE:IdleState,DASH:RunState}
+    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,SLEEP_TIMER:SleepState,SPACE:IdleState,DASH_GO:IdleState,DASH_STOP:IdleState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,SPACE:RunState,DASH_GO:DashState,DASH_STOP:IdleState},
+    SleepState:{LEFT_DOWN:RunState,RIGHT_DOWN:RunState,LEFT_UP:RunState,RIGHT_UP:RunState,SPACE:IdleState,DASH_GO:IdleState,DASH_STOP:IdleState},
 }
 
 class Boy:
