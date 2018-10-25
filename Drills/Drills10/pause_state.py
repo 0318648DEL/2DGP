@@ -1,31 +1,14 @@
-import random
-import json
-import os
-
 from pico2d import *
 
 import game_framework
 import title_state
-import pause_state
+import main_state
 
+name = "PauseState"
 
-
-name = "MainState"
-
-boy = None
+paused = None
 grass = None
-font = None
-
-
-
-class Grass:
-    def __init__(self):
-        self.image = load_image('grass.png')
-
-    def draw(self):
-        self.image.draw(400, 30)
-
-
+boy = None
 
 class Boy:
     def __init__(self):
@@ -45,17 +28,29 @@ class Boy:
     def draw(self):
         self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
 
+class Grass:
+    def __init__(self):
+        self.image = load_image('grass.png')
+
+    def draw(self):
+        self.image.draw(400, 30)
+
+class Pause:
+    def __init__(self):
+        self.image=load_image('pause.png')
+
+    def draw(self):
+        self.image.draw(400,300)
 
 def enter():
-    global boy,grass
-    boy=Boy()
+    global paused,boy,grass
+    paused=Pause()
+    boy=main_state.Boy()
     grass=Grass()
 
 def exit():
-    global boy,grass
-    del(boy)
-    del(grass)
-
+    global paused
+    del(paused)
 
 def pause():
     pass
@@ -66,26 +61,28 @@ def resume():
 
 
 def handle_events():
-    events=get_events()
+    events = get_events()
     for event in events:
-        if event.type==SDL_QUIT:
+        if event.type == SDL_QUIT:
             game_framework.quit()
-        elif event.type==SDL_KEYDOWN and event.key==SDLK_ESCAPE:
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_state(title_state)
-        elif event.type==SDL_KEYDOWN and event.key==SDLK_p:
-            game_framework.push_state(pause_state)
-
-
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
+            game_framework.pop_state()
 
 def update():
-    boy.update()
+    pass
 
 def draw():
     clear_canvas()
     grass.draw()
-    boy.draw()
+    main_state.boy.draw()
     update_canvas()
+    delay(0.5)
 
-
-
-
+    clear_canvas()
+    grass.draw()
+    main_state.boy.draw()
+    paused.draw()
+    update_canvas()
+    delay(0.5)
