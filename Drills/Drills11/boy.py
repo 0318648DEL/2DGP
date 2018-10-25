@@ -153,8 +153,9 @@ class DashState:
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,SLEEP_TIMER:SleepState,SPACE:IdleState,DASH_GO:IdleState,DASH_STOP:IdleState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,SPACE:RunState,DASH_GO:DashState,DASH_STOP:IdleState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,SPACE:RunState,DASH_GO:DashState,DASH_STOP:RunState},
     SleepState:{LEFT_DOWN:RunState,RIGHT_DOWN:RunState,LEFT_UP:RunState,RIGHT_UP:RunState,SPACE:IdleState,DASH_GO:IdleState,DASH_STOP:IdleState},
+    DashState:{LEFT_DOWN:DashState,LEFT_UP:RunState,RIGHT_DOWN:DashState,RIGHT_UP:RunState,SLEEP_TIMER:RunState,SPACE:DashState,DASH_GO:RunState,DASH_STOP:RunState}
 }
 
 class Boy:
