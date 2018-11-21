@@ -9,7 +9,7 @@ image = None
 
 def enter():
     global image
-    image = load_image('resources\cheetahman_title.png')
+    image = load_image('resources\\cheetahman_title.jpg')
 
 
 def exit():
@@ -30,7 +30,7 @@ def handle_events():
 
 def draw():
     clear_canvas()
-    image.draw(400,300)
+    image.draw(1280,720)
     update_canvas()
 
 

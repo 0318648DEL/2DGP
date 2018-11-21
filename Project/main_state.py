@@ -33,13 +33,7 @@ def collide(a, b):
 
 
 def enter():
-    global boy
-    boy = Boy()
-    game_world.add_object(boy, 1)
 
-    global grass
-    grass = Grass()
-    game_world.add_object(grass, 0)
 
     # fill here for balls
     global balls
